@@ -22,25 +22,21 @@ main {
 			background-repeat: no-repeat;
 			background-size: cover;
 			background-attachment: fixed;
-		}
-	}
 
-	.btns {
-		display: flex;
-		gap: 10px;
-		position: absolute;
-		bottom: 10px;
-		left: 10px;
-
-		li {
-			width: 20px;
-			height: 20px;
-			background: #fff;
-			border: 1px solid #000;
-			cursor: pointer;
-
-			&.on {
-				background: #000;
+			&:nth-of-type(1) {
+				background-image: url(../img/pic1.jpg);
+			}
+			&:nth-of-type(2) {
+				background-image: url(../img/pic2.jpg);
+			}
+			&:nth-of-type(3) {
+				background-image: url(../img/pic3.jpg);
+			}
+			&:nth-of-type(4) {
+				background-image: url(../img/pic4.jpg);
+			}
+			&:nth-of-type(5) {
+				background-image: url(../img/pic5.jpg);
 			}
 		}
 	}
@@ -49,7 +45,7 @@ main {
 		position: absolute;
 		top: 50%;
 		width: 20px;
-		height: 20px;
+		height: 100px;
 		border: 1px;
 		background: #fff;
 		transform: translateY(-50%);
