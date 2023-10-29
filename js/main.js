@@ -4,12 +4,7 @@ const btns = main.querySelectorAll('span');
 const speed = 500;
 let evtBlock = false;
 
-btns.forEach((btn) => {
-	btn.addEventListener('click', () => {
-		if (evtBlock) return;
-		move(btn.className);
-	});
-});
+btns.forEach((btn) => btn.addEventListener('click', () => !evtBlock && move(btn.className)));
 
 /*
 prev.addEventListener('click', () => {
