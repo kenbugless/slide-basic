@@ -1,58 +1,52 @@
-const pics = ['pic1.jpg', 'pic2.jpg', 'pic3.jpg', 'pic4.jpg', 'pic5.jpg'];
 const main = document.querySelector('main');
-//const [panel, btns] = main.querySelectorAll('ul');
-const speed = 1000;
+const panel = main.querySelector('.panel');
+const [prev, next] = main.querySelectorAll('span');
+const speed = 500;
 let evtBlock = false;
 
-createDOM(main, pics);
-
-/*
-Array.from(btns.children).forEach((btn, idx) => {
-	btn.addEventListener('click', (e) => {
-		if (e.target.classList.contains('on') || evtBlock) return;
-		activation(Array.from(btns.children), idx);
-		movePanel(panel, idx);
-	});
+prev.addEventListener('click', () => {
+	if (evtBlock) return;
+	movePrev();
 });
-*/
 
-function createDOM(targetEl, arr) {
-	const names = ['panel', 'btns'];
-	//클래스명을 반복을 돌면서 두개 ul을 동적생성하고 내부적으로 li까지 추가
-	names.map((name, idx) => {
-		let tags = '';
-		const ul = document.createElement('ul');
-		ul.classList.add(name);
+next.addEventListener('click', () => {
+	if (evtBlock) return;
+	moveNext();
+});
 
-		idx === 0 ? arr.forEach((pic) => (tags += `<li style='background-image:url(img/${pic})'></li>`)) : arr.forEach((_, idx) => (tags += `<li class='${idx === 0 && 'on'}'></li>`));
-
-		ul.innerHTML = tags;
-		targetEl.append(ul);
-	});
-	//동적으로 생성된 두개의 ul을 찾아서 반환
-	const [panel, btns] = targetEl.querySelectorAll('ul');
-	console.log(btns);
-	//이벤트 연결함수에 인수로 전달
-	bindingEvent(panel, btns);
-}
-
-function bindingEvent(panel, btns) {
-	Array.from(btns.children).forEach((btn, idx) => {
-		btn.addEventListener('click', (e) => {
-			if (e.target.classList.contains('on') || evtBlock) return;
-			activation(Array.from(btns.children), idx);
-			movePanel(panel, idx);
-		});
-	});
-}
-
-function activation(arr, idx) {
-	arr.forEach((el) => el.classList.remove('on'));
-	arr[idx].classList.add('on');
-}
-
-function movePanel(el, idx) {
+function movePrev() {
 	evtBlock = true;
-	console.log('func called!!');
-	new Anime(el, { left: -100 * idx + '%' }, { duration: speed, callback: () => (evtBlock = false) });
+	new Anime(
+		panel,
+		{ left: '0%' },
+		{
+			duration: speed,
+			callback: () => {
+				panel.prepend(panel.lastElementChild);
+				panel.style.left = '-100%';
+				evtBlock = false;
+			},
+		}
+	);
 }
+
+function moveNext() {
+	evtBlock = true;
+	new Anime(
+		panel,
+		{ left: '-200%' },
+		{
+			duration: speed,
+			callback: () => {
+				panel.append(panel.firstElementChild);
+				panel.style.left = '-100%';
+				evtBlock = false;
+			},
+		}
+	);
+}
+
+//순환 슬라이더 로직 (왼쪽이동)
+//1. 일단 패널을 왼쪽이동시킴 (현재 위치값이 -100%이므로 -200%으로 모션 이동 처리)
+//2. callback을 이용해서 모션이 끝난시점에 순간적으로 첫번째 자식슬라이드를 맨 뒤로 이동
+//3. 이동이 끝나면 패널이 앞쪽으로 밀리기 때문에 다시 순간적으로 패널의 위치값을 초기위치값은 -100%로 변경
