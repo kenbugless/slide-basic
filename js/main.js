@@ -19,13 +19,17 @@ Array.from(btns.children).forEach((btn, idx) => {
 
 function createDOM(targetEl, arr) {
 	let tags = '';
+	let tags2 = '';
 	const ul = document.createElement('ul');
+	const ul2 = document.createElement('ul');
 	ul.classList.add('panel');
-	arr.forEach((pic, idx) => {
-		tags += `<li style='background-image:url(img/${pic})'></li>`;
-	});
+	ul2.classList.add('btns');
+	arr.forEach((pic) => (tags += `<li style='background-image:url(img/${pic})'></li>`));
+	arr.forEach((_, idx) => (tags2 += `<li></li>`));
 	ul.innerHTML = tags;
+	ul2.innerHTML = tags2;
 	targetEl.append(ul);
+	targetEl.append(ul2);
 }
 
 function activation(arr, idx) {
