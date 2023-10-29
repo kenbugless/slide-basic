@@ -27,12 +27,11 @@ a {
 */
 main {
   width: 100%;
-  height: 100lvh;
+  height: 100vh;
   position: relative;
   overflow: hidden;
 }
 main .panel {
-  width: 500%;
   height: 100%;
   display: flex;
   position: absolute;
@@ -40,13 +39,13 @@ main .panel {
   left: -100%;
 }
 main .panel li {
-  width: 20%;
   height: 100%;
   overflow: hidden;
   position: relative;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  background-attachment: fixed;
 }
 main .panel li[data-index="1"] {
   background-image: url(../img/pic1.jpg);
@@ -74,10 +73,10 @@ main > span {
   border: 1px solid #000;
   cursor: pointer;
 }
-main > span.prev {
+main > span.prevBtn {
   left: 20px;
 }
-main > span.next {
+main > span.nextBtn {
   right: 20px;
 }
 
