@@ -32,7 +32,6 @@ main {
   overflow: hidden;
 }
 main .panel {
-  width: 500%;
   height: 100%;
   display: flex;
   position: absolute;
@@ -40,7 +39,6 @@ main .panel {
   left: -100%;
 }
 main .panel li {
-  width: 20%;
   height: 100%;
   overflow: hidden;
   position: relative;
