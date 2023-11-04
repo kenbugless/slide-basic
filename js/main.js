@@ -20,7 +20,16 @@ function init(len) {
 }
 
 function bindingEvent(arr) {
-	arr.forEach((btn) => btn.addEventListener('click', () => !evtBlock && move(btn.className)));
+	arr.forEach((btn) =>
+		btn.addEventListener('click', () => {
+			if (evtBlock) return;
+			//좌우버튼 클릭 시 무조건 롤링정지하고 stop 클래스 추가
+			clearInterval(timer);
+			toggleBtn.classList.add('stop');
+
+			move(btn.className);
+		})
+	);
 	//토글 버튼 클릭 시;
 	toggleBtn.addEventListener('click', (e) => {
 		//클릭한 버튼의 stop 클래스 유무 확인 후
