@@ -3,6 +3,7 @@ const panel = main.querySelector('.panel');
 const btns = main.querySelectorAll('span');
 const toggleBtn = main.querySelector('.toggleBtn');
 const speed = 500;
+const interval = 2000;
 let evtBlock = false;
 let timer = null;
 
@@ -35,6 +36,7 @@ function bindingEvent(arr) {
 		//클릭한 버튼의 stop 클래스 유무 확인 후
 		//stop 클래스가 있으면(롤링이 중지된 상태 )
 		if (e.currentTarget.classList.contains('stop')) {
+			move(btns[1].className);
 			//자동 롤링을 실행하고 stop 클래스 제거
 			timer = setInterval(() => move(btns[1] / clasName), interval);
 			e.target.classList.remove('stop');
