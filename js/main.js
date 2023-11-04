@@ -3,9 +3,13 @@ const panel = main.querySelector('.panel');
 const btns = main.querySelectorAll('span');
 const speed = 500;
 let evtBlock = false;
+let timer = null;
 
 init(panel.children.length);
 bindingEvent(btns);
+
+timer = setInterval(() => move(btns[1].className), interval);
+move(btns[1].className);
 
 function init(len) {
 	panel.style.width = 100 * len + '%';
